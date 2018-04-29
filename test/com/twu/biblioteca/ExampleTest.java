@@ -77,4 +77,44 @@ public class ExampleTest {
         app.getMainMenuSelectedOption();
         assertEquals("Invalid option, please select again\n", outContent.toString());
     }
+
+    @Test
+    public void testCheckOutValidBook() {
+        String expected = "Enter the book title that you wish to checkout: \n";
+        expected += "Thank you! Enjoy the book.\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(app.books.get(0).getTitle().getBytes());
+        System.setIn(in);
+        app.checkoutBook();
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void testCheckOutInvalidBook() {
+        String expected = "Enter the book title that you wish to checkout: \n";
+        expected += "That book is not available.\n";
+        ByteArrayInputStream in = new ByteArrayInputStream("Unavailable book\n".getBytes());
+        System.setIn(in);
+        app.checkoutBook();
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void testReturnValidBook() {
+        String expected = "Enter the book title that you wish to checkout: \n";
+        expected += "Thank you! Enjoy the book.\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(app.books.get(0).getTitle().getBytes());
+        System.setIn(in);
+        app.checkoutBook();
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void testReturnInvalidBook() {
+        String expected = "Enter the book title that you wish to checkout: \n";
+        expected += "That book is not available.\n";
+        ByteArrayInputStream in = new ByteArrayInputStream("Unavailable book\n".getBytes());
+        System.setIn(in);
+        app.checkoutBook();
+        assertEquals(expected, outContent.toString());
+    }
 }

@@ -17,6 +17,8 @@ public class BibliotecaApp {
         books.add(book_2);
         books.add(book_3);
         mainMenuOptions.add("List Books");
+        mainMenuOptions.add("Checkout Book");
+        mainMenuOptions.add("Return Book");
         mainMenuOptions.add("Quit");
     }
 
@@ -27,12 +29,36 @@ public class BibliotecaApp {
     }
 
     public void mainMenu() {
-        System.out.println("========== Main menu ==========");
-        System.out.println("========== Select an option ==========");
-        for (int i = 1; i <= mainMenuOptions.size(); i++) {
-            System.out.println(i + ": " + mainMenuOptions.get(i-1));
-        }
-        executeSelectedMainMenuOption(getMainMenuSelectedOption());
+//        System.out.println("========== Main menu ==========");
+//        System.out.println("========== Select an option ==========");
+//        for (int i = 1; i <= mainMenuOptions.size(); i++) {
+//            System.out.println(i + ": " + mainMenuOptions.get(i-1));
+//        }
+//
+//        int selectedOption = getMainMenuSelectedOption();
+//        while (selectedOption != mainMenuOptions.size()) {
+//            executeSelectedMainMenuOption(selectedOption);
+//            System.out.println("========== Main menu ==========");
+//            System.out.println("========== Select an option ==========");
+//            for (int i = 1; i <= mainMenuOptions.size(); i++) {
+//                System.out.println(i + ": " + mainMenuOptions.get(i-1));
+//            }
+//            selectedOption = getMainMenuSelectedOption();
+//        }
+//        quit();
+
+        int selectedOption;
+        do {
+            System.out.println("========== Main menu ==========");
+            System.out.println("========== Select an option ==========");
+            for (int i = 1; i <= mainMenuOptions.size(); i++) {
+                System.out.println(i + ": " + mainMenuOptions.get(i-1));
+            }
+
+            selectedOption = getMainMenuSelectedOption();
+            executeSelectedMainMenuOption(selectedOption);
+
+        }while(true);
     }
 
     public int getMainMenuSelectedOption() {
@@ -49,12 +75,59 @@ public class BibliotecaApp {
         switch (selectedOption) {
             case 1: listBook();
             break;
-            case 2: quit();
+            case 2: checkoutBook();
+            break;
+            case 3: returnBook();
+            break;
+            case 4: quit();
         }
     }
 
     public void quit() {
         System.out.println("Bye bye!");
+        System.exit(0);
+    }
+
+    public void checkoutBook() {
+        System.out.println("Enter the book title that you wish to checkout: ");
+        Scanner scan = new Scanner(System.in);
+        String title = scan.nextLine();
+        for (Book b : books) {
+            if (b.title.equals(title)) {
+                if (b.isCheckedOut()) {
+                    System.out.println("That book is not available.");
+                }
+                else {
+                    b.isCheckedOut = true;
+                    System.out.println("Thank you! Enjoy the book.");
+                }
+//                mainMenu();
+                return;
+            }
+        }
+        System.out.println("That book is not available.");
+//        mainMenu();
+    }
+
+    public void returnBook() {
+        System.out.println("Enter the book title that you wish to return: ");
+        Scanner scan = new Scanner(System.in);
+        String title = scan.nextLine();
+        for (Book b : books) {
+            if (b.title.equals(title)) {
+                if (!b.isCheckedOut()) {
+                    System.out.println("That is not a valid book to return.");
+                }
+                else {
+                    b.isCheckedOut = false;
+                    System.out.println("Thank you for returning the book.");
+                }
+                mainMenu();
+                return;
+            }
+        }
+        System.out.println("That is not a valid book to return.");
+        mainMenu();
     }
 
     public void listBook() {
@@ -68,6 +141,7 @@ public class BibliotecaApp {
                 System.out.println(bookDetail);
             }
         }
+//        mainMenu();
     }
 
 //    public void printBookDetail(Book b) {
