@@ -99,6 +99,26 @@ public class ExampleTest {
     }
 
     @Test
+    public void testCheckOutValidMovie() {
+        String expected = "Enter the movie name that you wish to checkout: \n";
+        expected += "Thank you! Enjoy the movie.\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(app.movies.get(0).getName().getBytes());
+        System.setIn(in);
+        app.checkoutMovie();
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void testCheckOutInvalidMovie() {
+        String expected = "Enter the movie name that you wish to checkout: \n";
+        expected += "That movie is not available.\n";
+        ByteArrayInputStream in = new ByteArrayInputStream("Unavailable movie\n".getBytes());
+        System.setIn(in);
+        app.checkoutMovie();
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
     public void testReturnValidBook() {
         String expected = "Enter the book title that you wish to checkout: \n";
         expected += "Thank you! Enjoy the book.\n";

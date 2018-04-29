@@ -30,6 +30,7 @@ public class BibliotecaApp {
         mainMenuOptions.add("Checkout Book");
         mainMenuOptions.add("Return Book");
         mainMenuOptions.add("List Movies");
+        mainMenuOptions.add("Checkout Movie");
         mainMenuOptions.add("Quit");
     }
 
@@ -74,7 +75,10 @@ public class BibliotecaApp {
             break;
             case 4: listMovie();
             break;
-            case 5: quit();
+            case 5: checkoutMovie();
+                break;
+            case 6: quit();
+            break;
         }
     }
 
@@ -121,6 +125,25 @@ public class BibliotecaApp {
         }
         System.out.println("That is not a valid book to return.");
         mainMenu();
+    }
+
+    public void checkoutMovie() {
+        System.out.println("Enter the movie name that you wish to checkout: ");
+        Scanner scan = new Scanner(System.in);
+        String title = scan.nextLine();
+        for (Movie m : movies) {
+            if (m.getName().equals(title)) {
+                if (m.isCheckedOut()) {
+                    System.out.println("That movie is not available.");
+                }
+                else {
+                    m.isCheckedOut = true;
+                    System.out.println("Thank you! Enjoy the movie.");
+                }
+                return;
+            }
+        }
+        System.out.println("That movie is not available.");
     }
 
     public void listBook() {
