@@ -49,7 +49,7 @@ public class BibliotecaApp {
 
         int selectedOption;
         do {
-            System.out.println("========== Main menu ==========");
+            System.out.println("\n========== Main menu ==========");
             System.out.println("========== Select an option ==========");
             for (int i = 1; i <= mainMenuOptions.size(); i++) {
                 System.out.println(i + ": " + mainMenuOptions.get(i-1));

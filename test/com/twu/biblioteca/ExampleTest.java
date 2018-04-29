@@ -37,19 +37,19 @@ public class ExampleTest {
 //        assertEquals("Welcome to Biblioteca-HuiXiong!\n", outContent.toString());
 //    }
 
-    @Test
-    public void testListBook() {
-        app.listBook();
-        String expected = "List of books available\n";
-        String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
-        expected+= s1 +'\n';
-        int index = 1;
-        for (BibliotecaApp.Book b : app.books) {
-            String bookDetail = String.format("%s: %-25s %-25s %-25s\n", index++, b.title, b.author, b.yearPublished);
-            expected += bookDetail;
-        }
-        assertEquals(expected, outContent.toString());
-    }
+//    @Test
+//    public void testListBook() {
+//        app.listBook();
+//        String expected = "List of books available\n";
+//        String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
+//        expected+= s1 +'\n';
+//        int index = 1;
+//        for (BibliotecaApp.Book b : app.books) {
+//            String bookDetail = String.format("%s: %-25s %-25s %-25s\n", index++, b.title, b.author, b.yearPublished);
+//            expected += bookDetail;
+//        }
+//        assertEquals(expected, outContent.toString());
+//    }
 
 //    @Test
 //    public void testPrintBookDetail(){
@@ -77,6 +77,24 @@ public class ExampleTest {
         app.getMainMenuSelectedOption();
         assertEquals("Invalid option, please select again\n", outContent.toString());
     }
+
+    @Test
+    public void testListBookShouldNotShowCheckedOutBooks() {
+        app.books.get(0).isCheckedOut = true;
+        app.listBook();
+        String expected = "List of books available\n";
+        String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
+        expected+= s1 +'\n';
+        int index = 1;
+        for (BibliotecaApp.Book b : app.books) {
+            if (!b.isCheckedOut) {
+                String bookDetail = String.format("%s: %-25s %-25s %-25s\n", index++, b.title, b.author, b.yearPublished);
+                expected += bookDetail;
+            }
+        }
+        assertEquals(expected, outContent.toString());
+    }
+
 
     @Test
     public void testCheckOutValidBook() {
