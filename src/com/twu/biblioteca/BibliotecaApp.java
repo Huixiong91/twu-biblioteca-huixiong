@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class BibliotecaApp {
     List<Book> books = new ArrayList<Book>();
     List<Movie> movies = new ArrayList<Movie>();
+    List<Account> accounts = new ArrayList<Account>();
     List<String> mainMenuOptions = new ArrayList<String>();
+    Account loggedInAccount;
 
     public BibliotecaApp() {
         // init
@@ -26,17 +28,26 @@ public class BibliotecaApp {
         movies.add(movie_2);
         movies.add(movie_3);
 
+        Account account_1 = new Account("111-1111", "password1", "name1", "email1@gmail.com", "987654321");
+        Account account_2= new Account("222-2222", "password2", "name2", "email2@gmail.com", "123456789");
+        Account account_3 = new Account("333-3333", "password3", "name3", "email3@gmail.com", "33334444");
+        accounts.add(account_1);
+        accounts.add(account_2);
+        accounts.add(account_3);
+
         mainMenuOptions.add("List Books");
         mainMenuOptions.add("Checkout Book");
         mainMenuOptions.add("Return Book");
         mainMenuOptions.add("List Movies");
         mainMenuOptions.add("Checkout Movie");
+        mainMenuOptions.add("Display your info");
         mainMenuOptions.add("Quit");
     }
 
     public static void main(String[] args) {
         System.out.println("Welcome to Biblioteca-HuiXiong!");
         BibliotecaApp app = new BibliotecaApp();
+        app.promptLogin();
         app.mainMenu();
     }
 
@@ -53,6 +64,39 @@ public class BibliotecaApp {
             executeSelectedMainMenuOption(selectedOption);
 
         }while(true);
+    }
+
+    public void promptLogin() {
+        System.out.println("Please Login");
+        String username;
+        String password;
+        boolean triedOnce = false;
+        do {
+            if (triedOnce) {
+                System.out.println("Invalid Credentials!");
+            }
+            triedOnce = true;
+            System.out.print("Enter your username: ");
+            Scanner scan = new Scanner(System.in);
+            username = scan.nextLine();
+            System.out.print("Enter your password: ");
+            password = scan.nextLine();
+        }while(!isValidCredentials(username, password));
+        System.out.println("Successfully logged in as " + username);
+        for (Account acc : accounts) {
+            if ((acc.getUsername().equals(username)) && (acc.getPassword().equals(password))) {
+                loggedInAccount = acc;
+            }
+        }
+    }
+
+    private boolean isValidCredentials(String username, String password) {
+        for (Account acc : accounts) {
+            if ((acc.getUsername().equals(username)) && (acc.getPassword().equals(password))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getMainMenuSelectedOption() {
@@ -76,8 +120,10 @@ public class BibliotecaApp {
             case 4: listMovie();
             break;
             case 5: checkoutMovie();
-                break;
-            case 6: quit();
+            break;
+            case 6: displayUserInfo();
+            break;
+            case 7: quit();
             break;
         }
     }
@@ -85,6 +131,10 @@ public class BibliotecaApp {
     public void quit() {
         System.out.println("Bye bye!");
         System.exit(0);
+    }
+
+    public void displayUserInfo() {
+        loggedInAccount.displayInfo();
     }
 
     public void checkoutBook() {
@@ -274,6 +324,67 @@ public class BibliotecaApp {
 
         public void setCheckedOut(boolean checkedOut) {
             isCheckedOut = checkedOut;
+        }
+    }
+
+    public class Account {
+        private String username;
+        private String password;
+        private String name;
+        private String email;
+        private String phoneNumber;
+
+        public Account(String username, String password, String name, String email, String phoneNumber) {
+            this.username = username;
+            this.password = password;
+            this.name = name;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public void displayInfo() {
+            System.out.println("Your information");
+            System.out.println("Name: " + getName() + "     Email: " + getEmail() + "      Phone Number: " + getPhoneNumber());
         }
     }
 }

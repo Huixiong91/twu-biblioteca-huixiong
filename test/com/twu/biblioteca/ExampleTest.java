@@ -44,7 +44,7 @@ public class ExampleTest {
         app.listBook();
         String expected = "List of books available\n";
         String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
-        expected+= s1 +'\n';
+        expected += s1 + '\n';
         int index = 1;
         for (BibliotecaApp.Book b : app.books) {
             if (!b.isCheckedOut) {
@@ -61,7 +61,7 @@ public class ExampleTest {
         app.listMovie();
         String expected = "List of movies available\n";
         String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
-        expected+= s1 +'\n';
+        expected += s1 + '\n';
         int index = 1;
         for (BibliotecaApp.Movie movie : app.movies) {
             if (!movie.isCheckedOut) {
@@ -135,6 +135,25 @@ public class ExampleTest {
         ByteArrayInputStream in = new ByteArrayInputStream("Unavailable book\n".getBytes());
         System.setIn(in);
         app.checkoutBook();
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void testLogin() {
+        ByteArrayInputStream in = new ByteArrayInputStream("111-1111\npassword1\n".getBytes());
+        System.setIn(in);
+        app.promptLogin();
+        String expected = "Please Login\n";
+        expected += "Enter your username: " + "Enter your password: " + "Successfully logged in as " + "111-1111\n";
+        assertEquals(expected, outContent.toString());
+    }
+
+    @Test
+    public void testDisplayUserInfo() {
+        app.loggedInAccount = app.accounts.get(0);
+        app.displayUserInfo();
+        String expected = "Your information\n";
+        expected += "Name: " + app.loggedInAccount.getName() + "     Email: " + app.loggedInAccount.getEmail() + "      Phone Number: " + app.loggedInAccount.getPhoneNumber() + "\n";
         assertEquals(expected, outContent.toString());
     }
 }
