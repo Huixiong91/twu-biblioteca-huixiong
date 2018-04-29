@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     List<Book> books = new ArrayList<Book>();
+    List<Movie> movies = new ArrayList<Movie>();
     List<String> mainMenuOptions = new ArrayList<String>();
 
     public BibliotecaApp() {
@@ -16,9 +17,19 @@ public class BibliotecaApp {
         books.add(book_1);
         books.add(book_2);
         books.add(book_3);
+
+        Movie movie_1 = new Movie("Movie 1", "2004", "Director 1");
+        Movie movie_2 = new Movie("Movie 2", "2014", "Director 2");
+        Movie movie_3 = new Movie("Movie 3", "2000", "Director 3");
+        movie_3.setRating(10);
+        movies.add(movie_1);
+        movies.add(movie_2);
+        movies.add(movie_3);
+
         mainMenuOptions.add("List Books");
         mainMenuOptions.add("Checkout Book");
         mainMenuOptions.add("Return Book");
+        mainMenuOptions.add("List Movies");
         mainMenuOptions.add("Quit");
     }
 
@@ -61,7 +72,9 @@ public class BibliotecaApp {
             break;
             case 3: returnBook();
             break;
-            case 4: quit();
+            case 4: listMovie();
+            break;
+            case 5: quit();
         }
     }
 
@@ -123,6 +136,24 @@ public class BibliotecaApp {
         }
     }
 
+    public void listMovie() {
+        System.out.println("List of movies available");
+        int index = 1;
+        String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
+        System.out.println(s1);
+        for (Movie movie : movies) {
+            if (!movie.isCheckedOut) {
+                String movieDetail;
+                if (movie.getRating() != null) {
+                    movieDetail = String.format("%s: %-25s %-25s %-25s %-2s", index++, movie.getName(), movie.getYear(), movie.getDirector(), movie.getRating());
+                } else {
+                    movieDetail = String.format("%s: %-25s %-25s %-25s Unrated", index++, movie.getName(), movie.getYear(), movie.getDirector());
+                }
+                System.out.println(movieDetail);
+            }
+        }
+    }
+
     public class Book {
         String title;
         String author;
@@ -160,6 +191,60 @@ public class BibliotecaApp {
             this.yearPublished = yearPublished;
         }
 
+        public boolean isCheckedOut() {
+            return isCheckedOut;
+        }
+
+        public void setCheckedOut(boolean checkedOut) {
+            isCheckedOut = checkedOut;
+        }
+    }
+
+    public class Movie {
+        String name;
+        String year;
+        String director;
+        Integer rating;
+        boolean isCheckedOut;
+
+        public Movie(String name, String year, String director) {
+            this.name = name;
+            this.year = year;
+            this.director = director;
+            this.isCheckedOut = false;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getYear() {
+            return year;
+        }
+
+        public void setYear(String year) {
+            this.year = year;
+        }
+
+        public String getDirector() {
+            return director;
+        }
+
+        public void setDirector(String director) {
+            this.director = director;
+        }
+
+        public Integer getRating() {
+            return rating;
+        }
+
+        public void setRating(Integer rating) {
+            this.rating = rating;
+        }
         public boolean isCheckedOut() {
             return isCheckedOut;
         }

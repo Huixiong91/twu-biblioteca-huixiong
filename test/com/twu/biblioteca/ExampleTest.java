@@ -55,6 +55,28 @@ public class ExampleTest {
         assertEquals(expected, outContent.toString());
     }
 
+    @Test
+    public void testListMovieShouldNotShowCheckedOutMovie() {
+        app.movies.get(0).isCheckedOut = true;
+        app.listMovie();
+        String expected = "List of movies available\n";
+        String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
+        expected+= s1 +'\n';
+        int index = 1;
+        for (BibliotecaApp.Movie movie : app.movies) {
+            if (!movie.isCheckedOut) {
+                String movieDetail;
+                if (movie.getRating() != null) {
+                    movieDetail = String.format("%s: %-25s %-25s %-25s %-2s", index++, movie.getName(), movie.getYear(), movie.getDirector(), movie.getRating());
+                } else {
+                    movieDetail = String.format("%s: %-25s %-25s %-25s Unrated", index++, movie.getName(), movie.getYear(), movie.getDirector());
+                }
+                expected += movieDetail + "\n";
+            }
+        }
+        assertEquals(expected, outContent.toString());
+    }
+
 
     @Test
     public void testCheckOutValidBook() {
