@@ -29,24 +29,6 @@ public class BibliotecaApp {
     }
 
     public void mainMenu() {
-//        System.out.println("========== Main menu ==========");
-//        System.out.println("========== Select an option ==========");
-//        for (int i = 1; i <= mainMenuOptions.size(); i++) {
-//            System.out.println(i + ": " + mainMenuOptions.get(i-1));
-//        }
-//
-//        int selectedOption = getMainMenuSelectedOption();
-//        while (selectedOption != mainMenuOptions.size()) {
-//            executeSelectedMainMenuOption(selectedOption);
-//            System.out.println("========== Main menu ==========");
-//            System.out.println("========== Select an option ==========");
-//            for (int i = 1; i <= mainMenuOptions.size(); i++) {
-//                System.out.println(i + ": " + mainMenuOptions.get(i-1));
-//            }
-//            selectedOption = getMainMenuSelectedOption();
-//        }
-//        quit();
-
         int selectedOption;
         do {
             System.out.println("\n========== Main menu ==========");
@@ -101,12 +83,10 @@ public class BibliotecaApp {
                     b.isCheckedOut = true;
                     System.out.println("Thank you! Enjoy the book.");
                 }
-//                mainMenu();
                 return;
             }
         }
         System.out.println("That book is not available.");
-//        mainMenu();
     }
 
     public void returnBook() {
@@ -141,12 +121,7 @@ public class BibliotecaApp {
                 System.out.println(bookDetail);
             }
         }
-//        mainMenu();
     }
-
-//    public void printBookDetail(Book b) {
-//        System.out.println("Author: " + b.author + " Year Published: " + b.yearPublished);
-//    }
 
     public class Book {
         String title;
