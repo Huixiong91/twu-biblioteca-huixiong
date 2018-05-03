@@ -40,15 +40,15 @@ public class ExampleTest {
 
     @Test
     public void testListBookShouldNotShowCheckedOutBooks() {
-        app.books.get(0).isCheckedOut = true;
+        app.books.get(0).setCheckedOut(true);
         app.listBook();
         String expected = "List of books available\n";
         String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
         expected += s1 + '\n';
         int index = 1;
-        for (BibliotecaApp.Book b : app.books) {
-            if (!b.isCheckedOut) {
-                String bookDetail = String.format("%s: %-25s %-25s %-25s\n", index++, b.title, b.author, b.yearPublished);
+        for (Book b : app.books) {
+            if (!b.isCheckedOut()) {
+                String bookDetail = String.format("%s: %-25s %-25s %-25s\n", index++, b.getTitle(), b.getAuthor(), b.getYearPublished());
                 expected += bookDetail;
             }
         }
@@ -57,14 +57,14 @@ public class ExampleTest {
 
     @Test
     public void testListMovieShouldNotShowCheckedOutMovie() {
-        app.movies.get(0).isCheckedOut = true;
+        app.movies.get(0).setCheckedOut(true);
         app.listMovie();
         String expected = "List of movies available\n";
         String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
         expected += s1 + '\n';
         int index = 1;
-        for (BibliotecaApp.Movie movie : app.movies) {
-            if (!movie.isCheckedOut) {
+        for (Movie movie : app.movies) {
+            if (!movie.isCheckedOut()) {
                 String movieDetail;
                 if (movie.getRating() != null) {
                     movieDetail = String.format("%s: %-25s %-25s %-25s %-2s", index++, movie.getName(), movie.getYear(), movie.getDirector(), movie.getRating());

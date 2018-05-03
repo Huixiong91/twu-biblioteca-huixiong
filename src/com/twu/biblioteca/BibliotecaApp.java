@@ -142,12 +142,12 @@ public class BibliotecaApp {
         Scanner scan = new Scanner(System.in);
         String title = scan.nextLine();
         for (Book b : books) {
-            if (b.title.equals(title)) {
+            if (b.getTitle().equals(title)) {
                 if (b.isCheckedOut()) {
                     System.out.println("That book is not available.");
                 }
                 else {
-                    b.isCheckedOut = true;
+                    b.setCheckedOut(true);
                     System.out.println("Thank you! Enjoy the book.");
                 }
                 return;
@@ -161,12 +161,12 @@ public class BibliotecaApp {
         Scanner scan = new Scanner(System.in);
         String title = scan.nextLine();
         for (Book b : books) {
-            if (b.title.equals(title)) {
+            if (b.getTitle().equals(title)) {
                 if (!b.isCheckedOut()) {
                     System.out.println("That is not a valid book to return.");
                 }
                 else {
-                    b.isCheckedOut = false;
+                    b.setCheckedOut(false);
                     System.out.println("Thank you for returning the book.");
                 }
                 mainMenu();
@@ -187,7 +187,7 @@ public class BibliotecaApp {
                     System.out.println("That movie is not available.");
                 }
                 else {
-                    m.isCheckedOut = true;
+                    m.setCheckedOut(true);
                     System.out.println("Thank you! Enjoy the movie.");
                 }
                 return;
@@ -202,8 +202,8 @@ public class BibliotecaApp {
         String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
         System.out.println(s1);
         for (Book book : books){
-            if (!book.isCheckedOut) {
-                String bookDetail = String.format("%s: %-25s %-25s %-25s", index++, book.title, book.author, book.yearPublished);
+            if (!book.isCheckedOut()) {
+                String bookDetail = String.format("%s: %-25s %-25s %-25s", index++, book.getTitle(), book.getAuthor(), book.getYearPublished());
                 System.out.println(bookDetail);
             }
         }
@@ -215,7 +215,7 @@ public class BibliotecaApp {
         String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
         System.out.println(s1);
         for (Movie movie : movies) {
-            if (!movie.isCheckedOut) {
+            if (!movie.isCheckedOut()) {
                 String movieDetail;
                 if (movie.getRating() != null) {
                     movieDetail = String.format("%s: %-25s %-25s %-25s %-2s", index++, movie.getName(), movie.getYear(), movie.getDirector(), movie.getRating());
@@ -224,167 +224,6 @@ public class BibliotecaApp {
                 }
                 System.out.println(movieDetail);
             }
-        }
-    }
-
-    public class Book {
-        String title;
-        String author;
-        String yearPublished;
-        boolean isCheckedOut;
-
-        public Book(String title, String author, String yearPublished) {
-            this.title = title;
-            this.author = author;
-            this.yearPublished = yearPublished;
-            this.isCheckedOut = false;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public String getYearPublished() {
-            return yearPublished;
-        }
-
-        public void setYearPublished(String yearPublished) {
-            this.yearPublished = yearPublished;
-        }
-
-        public boolean isCheckedOut() {
-            return isCheckedOut;
-        }
-
-        public void setCheckedOut(boolean checkedOut) {
-            isCheckedOut = checkedOut;
-        }
-    }
-
-    public class Movie {
-        String name;
-        String year;
-        String director;
-        Integer rating;
-        boolean isCheckedOut;
-
-        public Movie(String name, String year, String director) {
-            this.name = name;
-            this.year = year;
-            this.director = director;
-            this.isCheckedOut = false;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getYear() {
-            return year;
-        }
-
-        public void setYear(String year) {
-            this.year = year;
-        }
-
-        public String getDirector() {
-            return director;
-        }
-
-        public void setDirector(String director) {
-            this.director = director;
-        }
-
-        public Integer getRating() {
-            return rating;
-        }
-
-        public void setRating(Integer rating) {
-            this.rating = rating;
-        }
-        public boolean isCheckedOut() {
-            return isCheckedOut;
-        }
-
-        public void setCheckedOut(boolean checkedOut) {
-            isCheckedOut = checkedOut;
-        }
-    }
-
-    public class Account {
-        private String username;
-        private String password;
-        private String name;
-        private String email;
-        private String phoneNumber;
-
-        public Account(String username, String password, String name, String email, String phoneNumber) {
-            this.username = username;
-            this.password = password;
-            this.name = name;
-            this.email = email;
-            this.phoneNumber = phoneNumber;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-        }
-
-        public void displayInfo() {
-            System.out.println("Your information");
-            System.out.println("Name: " + getName() + "     Email: " + getEmail() + "      Phone Number: " + getPhoneNumber());
         }
     }
 }
