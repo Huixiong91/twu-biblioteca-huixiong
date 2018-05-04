@@ -18,27 +18,27 @@ public class Account {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
-    public String getPhoneNumber() {
+    String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void displayInfo() {
+    void displayInfo() {
         System.out.println("Your information");
         System.out.println("Name: " + getName() + "     Email: " + getEmail() + "      Phone Number: " + getPhoneNumber());
     }
