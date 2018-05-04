@@ -55,14 +55,4 @@ public class LibraryUnitTest {
         lib.checkoutMovie(movieToCheckOut.getName());
         assertEquals(true, lib.checkedOutMovies.contains(movieToCheckOut));
     }
-
-    @Test
-    public void testLogin() {
-        ByteArrayInputStream in = new ByteArrayInputStream("111-1111\npassword1\n".getBytes());
-        System.setIn(in);
-        app.promptLogin();
-        String expected = "Please Login\n";
-        expected += "Enter your username: " + "Enter your password: " + "Successfully logged in as " + "111-1111\n";
-        assertEquals(expected, outContent.toString());
-    }
 }

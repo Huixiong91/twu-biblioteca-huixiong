@@ -32,14 +32,6 @@ public class ExampleTest {
     }
 
     @Test
-    public void testGetMainMenuSelectedOptionNotifyInvalidOption() {
-        ByteArrayInputStream in = new ByteArrayInputStream("0\n1\n".getBytes());
-        System.setIn(in);
-        app.getMainMenuSelectedOption();
-        assertEquals("Invalid option, please select again\n", outContent.toString());
-    }
-
-    @Test
     public void testListBookShouldNotShowCheckedOutBooks() {
         lib.books.get(0).setCheckedOut(true);
         lib.listBook();
