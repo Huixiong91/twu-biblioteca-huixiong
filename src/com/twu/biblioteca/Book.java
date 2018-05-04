@@ -25,10 +25,6 @@ public class Book {
         return yearPublished;
     }
 
-    public boolean isCheckedOut() {
-        return isCheckedOut;
-    }
-
     public void setCheckedOut(boolean checkedOut) {
         isCheckedOut = checkedOut;
     }

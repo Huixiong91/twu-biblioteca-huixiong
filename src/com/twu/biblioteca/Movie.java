@@ -34,10 +34,6 @@ public class Movie {
         this.rating = rating;
     }
 
-    public boolean isCheckedOut() {
-        return isCheckedOut;
-    }
-
     public void setCheckedOut(boolean checkedOut) {
         isCheckedOut = checkedOut;
     }
