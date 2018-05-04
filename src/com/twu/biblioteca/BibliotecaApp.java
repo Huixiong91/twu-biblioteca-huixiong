@@ -5,22 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaApp {
-    List<Account> accounts = new ArrayList<Account>();
     List<String> mainMenuOptions = new ArrayList<String>();
-    Account loggedInAccount;
     Library lib;
 
     public BibliotecaApp() {
         // init
         lib = new Library();
-
-        Account account_1 = new Account("111-1111", "password1", "name1", "email1@gmail.com", "987654321");
-        Account account_2= new Account("222-2222", "password2", "name2", "email2@gmail.com", "123456789");
-        Account account_3 = new Account("333-3333", "password3", "name3", "email3@gmail.com", "33334444");
-        accounts.add(account_1);
-        accounts.add(account_2);
-        accounts.add(account_3);
-
         mainMenuOptions.add("List Books");
         mainMenuOptions.add("Checkout Book");
         mainMenuOptions.add("Return Book");
@@ -53,36 +43,7 @@ public class BibliotecaApp {
     }
 
     public void promptLogin() {
-        System.out.println("Please Login");
-        String username;
-        String password;
-        boolean triedOnce = false;
-        do {
-            if (triedOnce) {
-                System.out.println("Invalid Credentials!");
-            }
-            triedOnce = true;
-            System.out.print("Enter your username: ");
-            Scanner scan = new Scanner(System.in);
-            username = scan.nextLine();
-            System.out.print("Enter your password: ");
-            password = scan.nextLine();
-        }while(!isValidCredentials(username, password));
-        System.out.println("Successfully logged in as " + username);
-        for (Account acc : accounts) {
-            if ((acc.getUsername().equals(username)) && (acc.getPassword().equals(password))) {
-                loggedInAccount = acc;
-            }
-        }
-    }
-
-    private boolean isValidCredentials(String username, String password) {
-        for (Account acc : accounts) {
-            if ((acc.getUsername().equals(username)) && (acc.getPassword().equals(password))) {
-                return true;
-            }
-        }
-        return false;
+        lib.promptLogin();
     }
 
     public int getMainMenuSelectedOption() {
@@ -97,17 +58,17 @@ public class BibliotecaApp {
 
     public void executeSelectedMainMenuOption(int selectedOption) {
         switch (selectedOption) {
-            case 1: listBook();
+            case 1: lib.listBook();
             break;
             case 2: checkoutBook();
             break;
             case 3: returnBook();
             break;
-            case 4: listMovie();
+            case 4: lib.listMovie();
             break;
             case 5: checkoutMovie();
             break;
-            case 6: displayUserInfo();
+            case 6: lib.loggedInAccount.displayInfo();
             break;
             case 7: quit();
             break;
@@ -117,10 +78,6 @@ public class BibliotecaApp {
     public void quit() {
         System.out.println("Bye bye!");
         System.exit(0);
-    }
-
-    public void displayUserInfo() {
-        loggedInAccount.displayInfo();
     }
 
     public void checkoutBook() {
@@ -142,13 +99,5 @@ public class BibliotecaApp {
         Scanner scan = new Scanner(System.in);
         String title = scan.nextLine();
         lib.checkoutMovie(title);
-    }
-
-    public void listBook() {
-        lib.listBook();
-    }
-
-    public void listMovie() {
-        lib.listMovie();
     }
 }
