@@ -17,6 +17,7 @@ public class ExampleTest {
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
     private BibliotecaApp app = new BibliotecaApp();
+    private Library lib = new Library();
 
     @Before
     public void setUpStreams() {
@@ -40,14 +41,14 @@ public class ExampleTest {
 
     @Test
     public void testListBookShouldNotShowCheckedOutBooks() {
-        app.books.get(0).setCheckedOut(true);
+        lib.books.get(0).setCheckedOut(true);
         app.listBook();
         String expected = "List of books available\n";
         String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
         expected += s1 + '\n';
         int index = 1;
-        for (Book b : app.books) {
-            if (!b.isCheckedOut()) {
+        for (Book b : lib.books) {
+            if (!lib.checkedOutBooks.contains(b)) {
                 String bookDetail = String.format("%s: %-25s %-25s %-25s\n", index++, b.getTitle(), b.getAuthor(), b.getYearPublished());
                 expected += bookDetail;
             }
@@ -57,14 +58,14 @@ public class ExampleTest {
 
     @Test
     public void testListMovieShouldNotShowCheckedOutMovie() {
-        app.movies.get(0).setCheckedOut(true);
+        lib.movies.get(0).setCheckedOut(true);
         app.listMovie();
         String expected = "List of movies available\n";
         String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
         expected += s1 + '\n';
         int index = 1;
-        for (Movie movie : app.movies) {
-            if (!movie.isCheckedOut()) {
+        for (Movie movie : lib.movies) {
+            if (!lib.checkedOutMovie.contains(movie)) {
                 String movieDetail;
                 if (movie.getRating() != null) {
                     movieDetail = String.format("%s: %-25s %-25s %-25s %-2s", index++, movie.getName(), movie.getYear(), movie.getDirector(), movie.getRating());
@@ -82,7 +83,7 @@ public class ExampleTest {
     public void testCheckOutValidBook() {
         String expected = "Enter the book title that you wish to checkout: \n";
         expected += "Thank you! Enjoy the book.\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(app.books.get(0).getTitle().getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream(lib.books.get(0).getTitle().getBytes());
         System.setIn(in);
         app.checkoutBook();
         assertEquals(expected, outContent.toString());
@@ -102,7 +103,7 @@ public class ExampleTest {
     public void testCheckOutValidMovie() {
         String expected = "Enter the movie name that you wish to checkout: \n";
         expected += "Thank you! Enjoy the movie.\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(app.movies.get(0).getName().getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream(lib.movies.get(0).getName().getBytes());
         System.setIn(in);
         app.checkoutMovie();
         assertEquals(expected, outContent.toString());
@@ -122,7 +123,7 @@ public class ExampleTest {
     public void testReturnValidBook() {
         String expected = "Enter the book title that you wish to checkout: \n";
         expected += "Thank you! Enjoy the book.\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(app.books.get(0).getTitle().getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream(lib.books.get(0).getTitle().getBytes());
         System.setIn(in);
         app.checkoutBook();
         assertEquals(expected, outContent.toString());

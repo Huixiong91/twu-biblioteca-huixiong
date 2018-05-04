@@ -5,28 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BibliotecaApp {
-    List<Book> books = new ArrayList<Book>();
-    List<Movie> movies = new ArrayList<Movie>();
     List<Account> accounts = new ArrayList<Account>();
     List<String> mainMenuOptions = new ArrayList<String>();
     Account loggedInAccount;
+    Library lib;
 
     public BibliotecaApp() {
         // init
-        Book book_1 = new Book("Book 1", "Mr Lee", "2004");
-        Book book_2 = new Book("Book 2", "James Cook", "2011");
-        Book book_3 = new Book("Book 3", "Peter Ang", "2015");
-        books.add(book_1);
-        books.add(book_2);
-        books.add(book_3);
-
-        Movie movie_1 = new Movie("Movie 1", "2004", "Director 1");
-        Movie movie_2 = new Movie("Movie 2", "2014", "Director 2");
-        Movie movie_3 = new Movie("Movie 3", "2000", "Director 3");
-        movie_3.setRating(10);
-        movies.add(movie_1);
-        movies.add(movie_2);
-        movies.add(movie_3);
+        lib = new Library();
 
         Account account_1 = new Account("111-1111", "password1", "name1", "email1@gmail.com", "987654321");
         Account account_2= new Account("222-2222", "password2", "name2", "email2@gmail.com", "123456789");
@@ -141,89 +127,28 @@ public class BibliotecaApp {
         System.out.println("Enter the book title that you wish to checkout: ");
         Scanner scan = new Scanner(System.in);
         String title = scan.nextLine();
-        for (Book b : books) {
-            if (b.getTitle().equals(title)) {
-                if (b.isCheckedOut()) {
-                    System.out.println("That book is not available.");
-                }
-                else {
-                    b.setCheckedOut(true);
-                    System.out.println("Thank you! Enjoy the book.");
-                }
-                return;
-            }
-        }
-        System.out.println("That book is not available.");
+        lib.checkoutBook(title);
     }
 
     public void returnBook() {
         System.out.println("Enter the book title that you wish to return: ");
         Scanner scan = new Scanner(System.in);
         String title = scan.nextLine();
-        for (Book b : books) {
-            if (b.getTitle().equals(title)) {
-                if (!b.isCheckedOut()) {
-                    System.out.println("That is not a valid book to return.");
-                }
-                else {
-                    b.setCheckedOut(false);
-                    System.out.println("Thank you for returning the book.");
-                }
-                mainMenu();
-                return;
-            }
-        }
-        System.out.println("That is not a valid book to return.");
-        mainMenu();
+        lib.returnBook(title);
     }
 
     public void checkoutMovie() {
         System.out.println("Enter the movie name that you wish to checkout: ");
         Scanner scan = new Scanner(System.in);
         String title = scan.nextLine();
-        for (Movie m : movies) {
-            if (m.getName().equals(title)) {
-                if (m.isCheckedOut()) {
-                    System.out.println("That movie is not available.");
-                }
-                else {
-                    m.setCheckedOut(true);
-                    System.out.println("Thank you! Enjoy the movie.");
-                }
-                return;
-            }
-        }
-        System.out.println("That movie is not available.");
+        lib.checkoutMovie(title);
     }
 
     public void listBook() {
-        System.out.println("List of books available");
-        int index = 1;
-        String s1 = String.format("   %-25s %-25s %-25s", "Title", "Author", "Year Published");
-        System.out.println(s1);
-        for (Book book : books){
-            if (!book.isCheckedOut()) {
-                String bookDetail = String.format("%s: %-25s %-25s %-25s", index++, book.getTitle(), book.getAuthor(), book.getYearPublished());
-                System.out.println(bookDetail);
-            }
-        }
+        lib.listBook();
     }
 
     public void listMovie() {
-        System.out.println("List of movies available");
-        int index = 1;
-        String s1 = String.format("   %-25s %-25s %-25s %-2s", "Name", "Year", "Director", "Rating");
-        System.out.println(s1);
-        for (Movie movie : movies) {
-            if (!movie.isCheckedOut()) {
-                String movieDetail;
-                if (movie.getRating() != null) {
-                    movieDetail = String.format("%s: %-25s %-25s %-25s %-2s", index++, movie.getName(), movie.getYear(), movie.getDirector(), movie.getRating());
-                } else {
-                    movieDetail = String.format("%s: %-25s %-25s %-25s Unrated", index++, movie.getName(), movie.getYear(), movie.getDirector());
-                }
-                System.out.println(movieDetail);
-            }
-        }
+        lib.listMovie();
     }
 }
