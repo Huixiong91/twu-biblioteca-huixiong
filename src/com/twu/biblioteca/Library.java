@@ -49,7 +49,10 @@ public class Library {
         }
     }
 
-    public void checkoutBook(String title) {
+    public void checkoutBook() {
+        System.out.println("Enter the book title that you wish to checkout: ");
+        Scanner scan = new Scanner(System.in);
+        String title = scan.nextLine();
         for (Book b : books) {
             if (b.getTitle().equals(title) && !checkedOutBooks.contains(b)) {
                 checkedOutBooks.add(b);
@@ -60,7 +63,10 @@ public class Library {
         System.out.println("That book is not available.");
     }
 
-    public void returnBook(String title) {
+    public void returnBook() {
+        System.out.println("Enter the book title that you wish to return: ");
+        Scanner scan = new Scanner(System.in);
+        String title = scan.nextLine();
         for (Book b : books) {
             if (b.getTitle().equals(title) && checkedOutBooks.contains(b)) {
                 checkedOutBooks.remove(b);
@@ -89,7 +95,11 @@ public class Library {
         }
     }
 
-    public void checkoutMovie(String title) {
+    public void checkoutMovie() {
+        System.out.println("Enter the movie name that you wish to checkout: ");
+        Scanner scan = new Scanner(System.in);
+        String title = scan.nextLine();
+
         for (Movie m : movies) {
             if (m.getName().equals(title) && !checkedOutMovies.contains(m)) {
                 System.out.println("Thank you! Enjoy the movie.");

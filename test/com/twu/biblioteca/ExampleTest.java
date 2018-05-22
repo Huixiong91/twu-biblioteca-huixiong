@@ -77,7 +77,7 @@ public class ExampleTest {
         expected += "Thank you! Enjoy the book.\n";
         ByteArrayInputStream in = new ByteArrayInputStream(lib.books.get(0).getTitle().getBytes());
         System.setIn(in);
-        app.checkoutBook();
+        lib.checkoutBook();
         assertEquals(expected, outContent.toString());
     }
 
@@ -87,7 +87,7 @@ public class ExampleTest {
         expected += "That book is not available.\n";
         ByteArrayInputStream in = new ByteArrayInputStream("Unavailable book\n".getBytes());
         System.setIn(in);
-        app.checkoutBook();
+        lib.checkoutBook();
         assertEquals(expected, outContent.toString());
     }
 
@@ -97,7 +97,7 @@ public class ExampleTest {
         expected += "Thank you! Enjoy the movie.\n";
         ByteArrayInputStream in = new ByteArrayInputStream(lib.movies.get(0).getName().getBytes());
         System.setIn(in);
-        app.checkoutMovie();
+        lib.checkoutMovie();
         assertEquals(expected, outContent.toString());
     }
 
@@ -107,7 +107,7 @@ public class ExampleTest {
         expected += "That movie is not available.\n";
         ByteArrayInputStream in = new ByteArrayInputStream("Unavailable movie\n".getBytes());
         System.setIn(in);
-        app.checkoutMovie();
+        lib.checkoutMovie();
         assertEquals(expected, outContent.toString());
     }
 
@@ -117,7 +117,7 @@ public class ExampleTest {
         expected += "Thank you! Enjoy the book.\n";
         ByteArrayInputStream in = new ByteArrayInputStream(lib.books.get(0).getTitle().getBytes());
         System.setIn(in);
-        app.checkoutBook();
+        lib.checkoutBook();
         assertEquals(expected, outContent.toString());
     }
 
@@ -127,7 +127,7 @@ public class ExampleTest {
         expected += "That book is not available.\n";
         ByteArrayInputStream in = new ByteArrayInputStream("Unavailable book\n".getBytes());
         System.setIn(in);
-        app.checkoutBook();
+        lib.checkoutBook();
         assertEquals(expected, outContent.toString());
     }
 }

@@ -27,13 +27,13 @@ public class BibliotecaApp {
         switch (selectedOption) {
             case 1: lib.listBook();
             break;
-            case 2: checkoutBook();
+            case 2: lib.checkoutBook();
             break;
-            case 3: returnBook();
+            case 3: lib.returnBook();
             break;
             case 4: lib.listMovie();
             break;
-            case 5: checkoutMovie();
+            case 5: lib.checkoutMovie();
             break;
             case 6: lib.loggedInAccount.displayInfo();
             break;
@@ -45,26 +45,5 @@ public class BibliotecaApp {
     private void quit() {
         System.out.println("Bye bye!");
         System.exit(0);
-    }
-
-    void checkoutBook() {
-        System.out.println("Enter the book title that you wish to checkout: ");
-        Scanner scan = new Scanner(System.in);
-        String title = scan.nextLine();
-        lib.checkoutBook(title);
-    }
-
-    private void returnBook() {
-        System.out.println("Enter the book title that you wish to return: ");
-        Scanner scan = new Scanner(System.in);
-        String title = scan.nextLine();
-        lib.returnBook(title);
-    }
-
-    void checkoutMovie() {
-        System.out.println("Enter the movie name that you wish to checkout: ");
-        Scanner scan = new Scanner(System.in);
-        String title = scan.nextLine();
-        lib.checkoutMovie(title);
     }
 }

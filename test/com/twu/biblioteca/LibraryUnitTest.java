@@ -41,18 +41,22 @@ public class LibraryUnitTest {
     @Test
     public void testCheckoutAndReturnBookRecordsTransaction() {
         Book bookToCheckOut = lib.books.get(0);
+        ByteArrayInputStream in = new ByteArrayInputStream((bookToCheckOut.getTitle() + "\r\n" + bookToCheckOut.getTitle() +"\r\n").getBytes());
+        System.setIn(in);
         assertEquals(false, lib.checkedOutBooks.contains(bookToCheckOut));
-        lib.checkoutBook(bookToCheckOut.getTitle());
+        lib.checkoutBook();
         assertEquals(true, lib.checkedOutBooks.contains(bookToCheckOut));
-        lib.returnBook(bookToCheckOut.getTitle());
+        lib.returnBook();
         assertEquals(false, lib.checkedOutBooks.contains(bookToCheckOut));
     }
 
     @Test
     public void testCheckoutMovieRecordsTransaction() {
         Movie movieToCheckOut = lib.movies.get(0);
+        ByteArrayInputStream in = new ByteArrayInputStream(movieToCheckOut.getName().getBytes());
+        System.setIn(in);
         assertEquals(false, lib.checkedOutMovies.contains(movieToCheckOut));
-        lib.checkoutMovie(movieToCheckOut.getName());
+        lib.checkoutMovie();
         assertEquals(true, lib.checkedOutMovies.contains(movieToCheckOut));
     }
 }
