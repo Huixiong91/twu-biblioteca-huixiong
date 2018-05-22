@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ExampleTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-05-22T03:24:26" hostname="sghxng.local" time="0.005">
+  <properties/>
+  <testcase name="testListMovieShouldNotShowCheckedOutMovie" classname="ExampleTest" time="0.001"/>
+  <testcase name="testCheckOutValidMovie" classname="ExampleTest" time="0.0"/>
+  <testcase name="testListBookShouldNotShowCheckedOutBooks" classname="ExampleTest" time="0.001"/>
+  <testcase name="testCheckOutInvalidBook" classname="ExampleTest" time="0.001"/>
+  <testcase name="testCheckOutInvalidMovie" classname="ExampleTest" time="0.0"/>
+  <testcase name="testReturnInvalidBook" classname="ExampleTest" time="0.0"/>
+  <testcase name="testCheckOutValidBook" classname="ExampleTest" time="0.001"/>
+  <testcase name="testReturnValidBook" classname="ExampleTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

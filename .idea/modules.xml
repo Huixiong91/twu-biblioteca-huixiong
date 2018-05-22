@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/twu-biblioteca-huixiong.iml" filepath="$PROJECT_DIR$/twu-biblioteca-huixiong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/twu-biblioteca-huixiong_main.iml" filepath="$PROJECT_DIR$/.idea/modules/twu-biblioteca-huixiong_main.iml" group="twu-biblioteca-huixiong" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/twu-biblioteca-huixiong_test.iml" filepath="$PROJECT_DIR$/.idea/modules/twu-biblioteca-huixiong_test.iml" group="twu-biblioteca-huixiong" />
     </modules>
   </component>
 </project>
